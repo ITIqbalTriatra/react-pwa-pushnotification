@@ -22,7 +22,7 @@ export const requestForToken = () => {
     const vapidKey = `BML9KfqaN565KjUb0AjxnncwG2Y3m_Qw3b1MgAIcjKXbe5dyli_K5-xedgoCG2dthuu_2ePCFBMmLuyPevieIgY`;
     // The method getToken(): Promise<string> allows FCM to use the VAPID key credential
     // when sending message requests to different push services
-    return getToken(messaging, { vapidKey: vapidKey }) //to authorize send requests to supported web push services
+    return getToken(messaging, { vapidKey: `BML9KfqaN565KjUb0AjxnncwG2Y3m_Qw3b1MgAIcjKXbe5dyli_K5-xedgoCG2dthuu_2ePCFBMmLuyPevieIgY` }) //to authorize send requests to supported web push services
         .then((currentToken) => {
             if (currentToken) {
                 console.log('current token for client: ', currentToken);

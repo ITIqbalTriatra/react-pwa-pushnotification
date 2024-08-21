@@ -5,13 +5,13 @@ import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB3Js8U0dzBEWJPaMWnQwkYqUux_mxXOkw",
-    authDomain: "pwa-pushnotification-6b518.firebaseapp.com",
-    projectId: "pwa-pushnotification-6b518",
-    storageBucket: "pwa-pushnotification-6b518.appspot.com",
-    messagingSenderId: "376539431131",
-    appId: "1:376539431131:web:901654eacbe9f2999f8cfe",
-    measurementId: "G-3NRXFNS8H9"
+    apiKey: "AIzaSyBw9AcYrSRjbv3wi1sgOJKa89X_EksQUpc",
+    authDomain: "pwa-pushnotification-83236.firebaseapp.com",
+    projectId: "pwa-pushnotification-83236",
+    storageBucket: "pwa-pushnotification-83236.appspot.com",
+    messagingSenderId: "174704977049",
+    appId: "1:174704977049:web:2ecafb14f221e25c67c408",
+    measurementId: "G-BFPSM4M4N0"
 };
 
 initializeApp(firebaseConfig);
@@ -19,19 +19,20 @@ initializeApp(firebaseConfig);
 const messaging = getMessaging();
 
 export const requestForToken = () => {
+    const vapidKey = `BML9KfqaN565KjUb0AjxnncwG2Y3m_Qw3b1MgAIcjKXbe5dyli_K5-xedgoCG2dthuu_2ePCFBMmLuyPevieIgY`;
     // The method getToken(): Promise<string> allows FCM to use the VAPID key credential
     // when sending message requests to different push services
-    return getToken(messaging, { vapidKey: `BJDlFDwWingEqHCk7d8jppFqK-r6cVv9QEZpG8zZHx1n6uLGk4WGfTEIhqjDjLW_hsSAl3JZXI731kLtWFXoujU` }) //to authorize send requests to supported web push services
+    return getToken(messaging, { vapidKey: vapidKey }) //to authorize send requests to supported web push services
         .then((currentToken) => {
             if (currentToken) {
                 console.log('current token for client: ', currentToken);
 
-                if(localStorage.getItem('fcmToken') && currentToken !==localStorage.getItem('fcmToken')){
+                if (localStorage.getItem('fcmToken') && currentToken !== localStorage.getItem('fcmToken')) {
                     localStorage.setItem('fcmToken', currentToken);
 
                 }
 
-                else if(!localStorage.getItem('fcmToken')){
+                else if (!localStorage.getItem('fcmToken')) {
                     localStorage.setItem('fcmToken', currentToken);
 
                 }
@@ -50,10 +51,10 @@ export const requestForToken = () => {
 // - a message is received while the app has focus
 // - the user clicks on an app notification created by a service worker `messaging.onBackgroundMessage` handler.
 export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
+    new Promise((resolve) => {
+        onMessage(messaging, (payload) => {
+            resolve(payload);
+        });
     });
-  });
 
 
